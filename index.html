@@ -85,8 +85,8 @@
   <!-- NAV -->
   <header class="fixed top-0 left-0 right-0 z-40 backdrop-blur-md bg-[var(--navy)]/90">
     <div class="max-w-6xl mx-auto px-5 md:px-8 flex items-center justify-between h-16">
-      <a href="#top" class="flex items-center gap-2 text-white">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 2C12 2 5 11.5 5 16a7 7 0 0 0 14 0C19 11.5 12 2 12 2Z" fill="#2EC4B6"/></svg>
+      <a href="#top" class="flex items-center gap-2.5 text-white">
+        <img src="assets/logo.jpg" alt="Özəl Su loqo" class="w-9 h-9 rounded-full object-cover border-2 border-white/30">
         <span class="display font-semibold text-lg tracking-tight">Özəl Su</span>
       </a>
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-white/80">
@@ -124,25 +124,13 @@
       </div>
 
       <div class="reveal in flex justify-center">
-        <div class="relative fill-mask" style="width:200px;height:300px;">
-          <svg viewBox="0 0 200 300" class="absolute inset-0 w-full h-full">
-            <defs>
-              <clipPath id="bottleClip">
-                <path d="M70 10 H130 V40 C130 50 145 55 145 80 V270 C145 285 130 295 115 295 H85 C70 295 55 285 55 270 V80 C55 55 70 50 70 40 Z"/>
-              </clipPath>
-            </defs>
-            <path d="M70 10 H130 V40 C130 50 145 55 145 80 V270 C145 285 130 295 115 295 H85 C70 295 55 285 55 270 V80 C55 55 70 50 70 40 Z"
-              fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.45)" stroke-width="2.5"/>
-            <g clip-path="url(#bottleClip)">
-              <rect id="bottleFill" x="55" y="120" width="90" height="180" fill="url(#waterGrad)"/>
-              <defs>
-                <linearGradient id="waterGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#2EC4B6" stop-opacity="0.85"/>
-                  <stop offset="100%" stop-color="#0B3D55" stop-opacity="0.9"/>
-                </linearGradient>
-              </defs>
-            </g>
-          </svg>
+        <div class="relative" style="width:320px;">
+          <div class="absolute -inset-4 rounded-[2rem] blur-2xl opacity-40" style="background:var(--aqua);"></div>
+          <img src="assets/van.jpg" alt="Özəl Su çatdırılma maşını" class="relative w-full rounded-[1.75rem] shadow-2xl border-4 border-white/10 card-hover">
+          <div class="absolute -bottom-5 -left-5 bg-white rounded-2xl px-4 py-3 shadow-xl flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full" style="background:var(--aqua);"></span>
+            <span class="text-xs font-semibold" style="color:var(--navy-deep);">Pulsuz çatdırılma</span>
+          </div>
         </div>
       </div>
     </div>
@@ -171,13 +159,8 @@
           <li class="flex items-center gap-3"><span class="w-2 h-2 rounded-full" style="background:var(--aqua);"></span>Eyni gün ərzində çatdırılma</li>
         </ul>
       </div>
-      <div class="order-1 md:order-2 card-hover rounded-3xl p-10 flex items-center justify-center" style="background:linear-gradient(160deg, #fff, var(--mist));border:1px solid #E1F3F1;">
-        <svg width="140" height="220" viewBox="0 0 200 300">
-          <path d="M70 10 H130 V40 C130 50 145 55 145 80 V270 C145 285 130 295 115 295 H85 C70 295 55 285 55 270 V80 C55 55 70 50 70 40 Z"
-            fill="#EAF8F6" stroke="var(--navy)" stroke-width="3"/>
-          <rect x="65" y="120" width="70" height="160" rx="6" fill="var(--aqua)" opacity="0.55"/>
-          <text x="100" y="170" text-anchor="middle" class="mono" font-size="18" fill="var(--navy-deep)" font-weight="700">19L</text>
-        </svg>
+      <div class="order-1 md:order-2 card-hover rounded-3xl overflow-hidden flex items-center justify-center" style="border:1px solid #E1F3F1;">
+        <img src="assets/logo.jpg" alt="Özəl Su loqo" class="w-full h-full object-cover" style="min-height:280px;">
       </div>
     </div>
   </section>
@@ -227,6 +210,11 @@
       <p class="text-white/60 text-sm mb-7">Çatdırılma daxildir · Şəhər daxilində</p>
       <a href="#sifaris" class="btn-primary inline-block px-8 py-3.5 rounded-full w-full">İndi sifariş et</a>
     </div>
+
+    <div class="reveal max-w-md mx-auto mt-5 rounded-2xl px-6 py-4 flex items-center gap-4" style="background:linear-gradient(120deg,#FFF6E9,#FFFFFF);border:1px solid #F4E6C8;">
+      <span class="text-3xl">🎁</span>
+      <p class="text-sm font-medium" style="color:var(--navy-deep);">Aksiya: <strong>3 su alana 1 su hədiyyə!</strong></p>
+    </div>
   </section>
 
   <!-- SİFARİŞ FORMU -->
@@ -263,18 +251,32 @@
 
   <!-- ƏLAQƏ -->
   <section id="elaqe" class="max-w-6xl mx-auto px-5 md:px-8 pb-24">
-    <div class="reveal grid sm:grid-cols-3 gap-6 text-center">
+    <div class="reveal grid sm:grid-cols-3 gap-6 text-center mb-10">
       <div class="rounded-2xl p-7" style="background:var(--mist);">
         <p class="text-xs mono uppercase tracking-widest mb-2 text-[var(--navy)]/60">Telefon</p>
-        <p class="font-semibold" style="color:var(--navy-deep);" id="contactPhone">+994 50 000 00 00</p>
+        <a href="tel:0702045552" class="font-semibold hover:underline" style="color:var(--navy-deep);" id="contactPhone">070 204 55 52</a>
       </div>
       <div class="rounded-2xl p-7" style="background:var(--mist);">
         <p class="text-xs mono uppercase tracking-widest mb-2 text-[var(--navy)]/60">İş saatları</p>
         <p class="font-semibold" style="color:var(--navy-deep);">09:00 – 20:00</p>
       </div>
       <div class="rounded-2xl p-7" style="background:var(--mist);">
-        <p class="text-xs mono uppercase tracking-widest mb-2 text-[var(--navy)]/60">Ərazi</p>
-        <p class="font-semibold" style="color:var(--navy-deep);">Bakı və ətrafı</p>
+        <p class="text-xs mono uppercase tracking-widest mb-2 text-[var(--navy)]/60">Çatdırılma</p>
+        <p class="font-semibold" style="color:var(--navy-deep);">Pulsuz, ödənişsiz</p>
+      </div>
+    </div>
+
+    <div class="reveal rounded-3xl p-8 md:p-10" style="background:var(--navy);">
+      <p class="mono text-[var(--aqua-light)] text-xs tracking-[0.25em] uppercase mb-4 text-center">Çatdırılma ərazisi</p>
+      <div class="flex flex-wrap justify-center gap-3">
+        <span class="px-4 py-2 rounded-full text-sm text-white" style="background:rgba(255,255,255,0.08);">Binə</span>
+        <span class="px-4 py-2 rounded-full text-sm text-white" style="background:rgba(255,255,255,0.08);">Mərdəkan</span>
+        <span class="px-4 py-2 rounded-full text-sm text-white" style="background:rgba(255,255,255,0.08);">Şüvəlan</span>
+        <span class="px-4 py-2 rounded-full text-sm text-white" style="background:rgba(255,255,255,0.08);">Ramana</span>
+        <span class="px-4 py-2 rounded-full text-sm text-white" style="background:rgba(255,255,255,0.08);">Suraxanı</span>
+        <span class="px-4 py-2 rounded-full text-sm text-white" style="background:rgba(255,255,255,0.08);">Buzovna</span>
+        <span class="px-4 py-2 rounded-full text-sm text-white" style="background:rgba(255,255,255,0.08);">Bakıxanov</span>
+        <span class="px-4 py-2 rounded-full text-sm text-white" style="background:rgba(255,255,255,0.08);">Qaraçuxur</span>
       </div>
     </div>
   </section>
@@ -447,24 +449,15 @@ const io = new IntersectionObserver(es=>{
 },{threshold:.15});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-/* ================= HERO BOTTLE FILL ================= */
+/* ================= INIT ================= */
 window.addEventListener('DOMContentLoaded', ()=>{
-  const fill = document.getElementById('bottleFill');
-  let h = 0;
-  const target = 165;
-  const grow = setInterval(()=>{
-    h += 5;
-    if(h>=target){ h=target; clearInterval(grow); }
-    fill.setAttribute('y', 280 - h);
-    fill.setAttribute('height', h);
-  }, 28);
   document.getElementById('yr').textContent = new Date().getFullYear();
 });
 
 /* ================= SETTINGS (public) ================= */
 function loadPublicSettings(){
   const price = LS.get('os_price', 3.50);
-  const phone = LS.get('os_phone', '+994 50 000 00 00');
+  const phone = LS.get('os_phone', '+994 70 204 55 52');
   document.getElementById('priceShow').textContent = fmt(price);
   document.getElementById('contactPhone').textContent = phone;
 }
@@ -477,7 +470,7 @@ document.getElementById('orderForm').addEventListener('submit', e=>{
   const phone = document.getElementById('ordPhone').value;
   const qty = document.getElementById('ordQty').value;
   const addr = document.getElementById('ordAddr').value;
-  const waPhone = (LS.get('os_phone','+994500000000')).replace(/[^0-9]/g,'');
+  const waPhone = (LS.get('os_phone','994702045552')).replace(/[^0-9]/g,'');
   const price = LS.get('os_price', 3.50);
   const total = (price*qty).toFixed(2);
   const msg = `Salam! Sifariş vermək istəyirəm:%0A%0AAd: ${name}%0ATelefon: ${phone}%0ABidon sayı: ${qty}%0AÜnvan: ${addr}%0ATəxmini məbləğ: ${total} AZN`;
@@ -527,7 +520,7 @@ function showAdminApp(){
   document.getElementById('adminLogin').style.display='none';
   document.getElementById('adminApp').classList.remove('hidden');
   document.getElementById('setPrice').value = LS.get('os_price', 3.50);
-  document.getElementById('setPhone').value = LS.get('os_phone', '+994 50 000 00 00');
+  document.getElementById('setPhone').value = LS.get('os_phone', '+994 70 204 55 52');
   document.getElementById('sDate').valueAsDate = new Date();
   document.getElementById('pDate').valueAsDate = new Date();
   switchTab('dash');
