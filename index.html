@@ -348,7 +348,7 @@
     <div class="reveal max-w-md mx-auto rounded-3xl p-10 text-center card-hover relative" style="background:var(--navy);">
       <span class="absolute -top-3 right-4 bg-white text-[10px] font-bold uppercase tracking-wide px-3 py-1.5 rounded-full shadow-lg rotate-3" style="color:var(--navy-deep);">Mükəmməl seçim</span>
       <p class="mono text-[var(--aqua-light)] text-xs tracking-[0.2em] uppercase mb-3">19 Litr bidon</p>
-      <p class="display text-white text-5xl font-bold mb-2"><span id="priceShow">2.50</span> <span class="text-2xl font-medium">AZN</span></p>
+      <p class="display text-white text-5xl font-bold mb-2"><span id="priceShow">3.00</span> <span class="text-2xl font-medium">AZN</span></p>
       <p class="text-white/60 text-sm mb-7">Çatdırılma daxildir · Şəhər daxilində</p>
       <a href="#sifaris" class="btn-primary inline-block px-8 py-3.5 rounded-full w-full">İndi sifariş et</a>
     </div>
@@ -746,7 +746,7 @@ if(window.matchMedia('(display-mode: standalone)').matches || window.navigator.s
 /* ================= SETTINGS (public) ================= */
 function loadPublicSettings(){
   // local fallback first (instant paint)
-  const price = LS.get('os_price', 2.50);
+  const price = LS.get('os_price', 3.00);
   const phone = LS.get('os_phone', '+994 70 204 55 52');
   document.getElementById('priceShow').textContent = fmt(price);
   document.getElementById('contactPhone').textContent = phone;
@@ -791,7 +791,7 @@ document.getElementById('orderForm').addEventListener('submit', e=>{
   const qty = document.getElementById('ordQty').value;
   const addr = document.getElementById('ordAddr').value;
   const waPhone = (LS.get('os_phone','994702045552')).replace(/[^0-9]/g,'');
-  const price = LS.get('os_price', 2.50);
+  const price = LS.get('os_price', 3.00);
   const total = (price*qty).toFixed(2);
   const msg = `Salam! Sifariş vermək istəyirəm:%0A%0AAd: ${name}%0ATelefon: ${phone}%0ABidon sayı: ${qty}%0AÜnvan: ${addr}%0ATəxmini məbləğ: ${total} AZN`;
   window.open(`https://wa.me/${waPhone}?text=${msg}`, '_blank');
@@ -839,7 +839,7 @@ function logoutAdmin(){
 function showAdminApp(){
   document.getElementById('adminLogin').style.display='none';
   document.getElementById('adminApp').classList.remove('hidden');
-  document.getElementById('setPrice').value = LS.get('os_price', 2.50);
+  document.getElementById('setPrice').value = LS.get('os_price', 3.00);
   document.getElementById('setPhone').value = LS.get('os_phone', '+994 70 204 55 52');
   document.getElementById('ghRepo').value = LS.get('gh_repo', 'Samir210-az/ozelsu');
   document.getElementById('ghToken').value = LS.get('gh_token', '');
@@ -1107,7 +1107,7 @@ function changePassword(){
   alert('Şifrə yeniləndi!');
 }
 function exportData(){
-  const data = { sales: getSales(), purch: getPurch(), price: LS.get('os_price',2.50), phone: LS.get('os_phone','') };
+  const data = { sales: getSales(), purch: getPurch(), price: LS.get('os_price',3.00), phone: LS.get('os_phone','') };
   const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json'});
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
