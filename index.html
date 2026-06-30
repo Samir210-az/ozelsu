@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Özəl Su — 19 Litr Bulaq Suyu | Bakı</title>
+<meta name="description" content="Özəl Su — Bakıda 19 litrlik bulaq suyu çatdırılması. Sürətli sifariş, təmiz su, etibarlı xidmət.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root{
+    --navy:#0B3D55;
+    --navy-deep:#073B4C;
+    --aqua:#2EC4B6;
+    --aqua-light:#8FE3D9;
+    --mist:#F2FAFC;
+    --sand:#FFFFFF;
+    --ink:#0E2A33;
+  }
+  *{scroll-behavior:smooth;}
+  body{font-family:'Inter',sans-serif;background:var(--mist);color:var(--ink);overflow-x:hidden;}
+  h1,h2,h3,.display{font-family:'Fraunces',serif;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+
+  /* ---- Wave ---- */
+  .wave-wrap{position:relative;overflow:hidden;}
+  .wave-svg{display:block;width:100%;height:auto;}
+  .wave-anim{animation:waveShift 14s linear infinite;}
+  @keyframes waveShift{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(-50%);}
+  }
+
+  /* ---- Droplets / parallax bubbles ---- */
+  .bubble{position:absolute;border-radius:50%;background:radial-gradient(circle at 30% 30%, rgba(255,255,255,.85), rgba(143,227,217,.25));pointer-events:none;}
+  @keyframes floatY{
+    0%,100%{transform:translateY(0) translateX(0);}
+    50%{transform:translateY(-26px) translateX(8px);}
+  }
+
+  /* ---- Hero fill animation ---- */
+  .fill-mask{position:relative;}
+  .fill-water{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(180deg, rgba(46,196,182,.35), rgba(11,61,85,.55));transition:height 1.2s cubic-bezier(.22,1,.36,1);}
+
+  /* reveal on scroll */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease, transform .8s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  .btn-primary{background:var(--aqua);color:var(--navy-deep);font-weight:700;transition:.25s ease;}
+  .btn-primary:hover{background:#26ABA0;transform:translateY(-2px);box-shadow:0 10px 24px -8px rgba(46,196,182,.6);}
+  .btn-ghost{border:1.5px solid rgba(255,255,255,.55);color:#fff;transition:.25s ease;}
+  .btn-ghost:hover{background:rgba(255,255,255,.12);transform:translateY(-2px);}
+
+  .card-hover{transition:.3s ease;}
+  .card-hover:hover{transform:translateY(-6px);box-shadow:0 20px 40px -16px rgba(11,61,85,.25);}
+
+  ::selection{background:var(--aqua);color:var(--navy-deep);}
+
+  /* scrollbar */
+  ::-webkit-scrollbar{width:10px;}
+  ::-webkit-scrollbar-track{background:var(--mist);}
+  ::-webkit-scrollbar-thumb{background:var(--aqua-light);border-radius:8px;}
+
+  @media (prefers-reduced-motion: reduce){
+    .wave-anim{animation:none;}
+    .reveal{transition:none;opacity:1;transform:none;}
+    .bubble{animation:none !important;}
+  }
+
+  /* Admin */
+  #adminRoot{display:none;}
+  .tab-active{background:var(--navy);color:#fff;}
+  input,select{outline:none;}
+  input:focus,select:focus{box-shadow:0 0 0 3px rgba(46,196,182,.35);}
+  table{border-collapse:separate;border-spacing:0;}
+  tbody tr:hover{background:#EAF8F6;}
+</style>
+</head>
+<body>
+
+<!-- ============ PUBLIC SITE ============ -->
+<div id="siteRoot">
+
+  <!-- NAV -->
+  <header class="fixed top-0 left-0 right-0 z-40 backdrop-blur-md bg-[var(--navy)]/90">
+    <div class="max-w-6xl mx-auto px-5 md:px-8 flex items-center justify-between h-16">
+      <a href="#top" class="flex items-center gap-2 text-white">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 2C12 2 5 11.5 5 16a7 7 0 0 0 14 0C19 11.5 12 2 12 2Z" fill="#2EC4B6"/></svg>
+        <span class="display font-semibold text-lg tracking-tight">Özəl Su</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-white/80">
+        <a href="#mehsul" class="hover:text-white transition">Məhsul</a>
+        <a href="#niye-biz" class="hover:text-white transition">Niyə biz</a>
+        <a href="#qiymet" class="hover:text-white transition">Qiymət</a>
+        <a href="#elaqe" class="hover:text-white transition">Əlaqə</a>
+      </nav>
+      <a href="#sifaris" class="btn-primary px-5 py-2.5 rounded-full text-sm">Sifariş et</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="top" class="relative pt-16 wave-wrap" style="background:linear-gradient(180deg, var(--navy-deep), var(--navy) 60%);">
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+      <div class="bubble" style="width:90px;height:90px;top:18%;left:8%;animation:floatY 7s ease-in-out infinite;"></div>
+      <div class="bubble" style="width:40px;height:40px;top:60%;left:18%;animation:floatY 9s ease-in-out infinite .6s;"></div>
+      <div class="bubble" style="width:60px;height:60px;top:30%;right:12%;animation:floatY 8s ease-in-out infinite .3s;"></div>
+      <div class="bubble" style="width:24px;height:24px;top:72%;right:22%;animation:floatY 6s ease-in-out infinite 1s;"></div>
+    </div>
+
+    <div class="relative max-w-6xl mx-auto px-5 md:px-8 pt-20 pb-28 md:pt-28 md:pb-36 grid md:grid-cols-2 gap-12 items-center">
+      <div class="reveal in">
+        <p class="mono text-[var(--aqua-light)] text-xs tracking-[0.25em] uppercase mb-4">Bakı · Qapıya çatdırılma</p>
+        <h1 class="display text-white text-4xl md:text-6xl font-semibold leading-[1.05] mb-6">
+          19 litrlik su,<br><span style="color:var(--aqua);">eyni gün</span> qapınızda.
+        </h1>
+        <p class="text-white/70 text-lg max-w-md mb-8 leading-relaxed">
+          Təbii bulaq suyu, möhürlənmiş qablaşdırma, sürətli çatdırılma. Ailəniz və ofisiniz üçün etibarlı su təminatı.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="#sifaris" class="btn-primary px-7 py-3.5 rounded-full">Bu gün sifariş et</a>
+          <a href="#mehsul" class="btn-ghost px-7 py-3.5 rounded-full">Məhsula bax</a>
+        </div>
+      </div>
+
+      <div class="reveal in flex justify-center">
+        <div class="relative fill-mask" style="width:200px;height:300px;">
+          <svg viewBox="0 0 200 300" class="absolute inset-0 w-full h-full">
+            <defs>
+              <clipPath id="bottleClip">
+                <path d="M70 10 H130 V40 C130 50 145 55 145 80 V270 C145 285 130 295 115 295 H85 C70 295 55 285 55 270 V80 C55 55 70 50 70 40 Z"/>
+              </clipPath>
+            </defs>
+            <path d="M70 10 H130 V40 C130 50 145 55 145 80 V270 C145 285 130 295 115 295 H85 C70 295 55 285 55 270 V80 C55 55 70 50 70 40 Z"
+              fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.45)" stroke-width="2.5"/>
+            <g clip-path="url(#bottleClip)">
+              <rect id="bottleFill" x="55" y="120" width="90" height="180" fill="url(#waterGrad)"/>
+              <defs>
+                <linearGradient id="waterGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#2EC4B6" stop-opacity="0.85"/>
+                  <stop offset="100%" stop-color="#0B3D55" stop-opacity="0.9"/>
+                </linearGradient>
+              </defs>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- wave divider -->
+    <svg class="wave-svg" viewBox="0 0 1440 90" preserveAspectRatio="none">
+      <g class="wave-anim">
+        <path d="M0 40 C 240 90, 480 0, 720 40 C 960 80, 1200 10, 1440 40 L1440 90 L0 90 Z" fill="#F2FAFC"/>
+      </g>
+    </svg>
+  </section>
+
+  <!-- MƏHSUL -->
+  <section id="mehsul" class="max-w-6xl mx-auto px-5 md:px-8 py-20 md:py-28">
+    <div class="reveal grid md:grid-cols-2 gap-14 items-center">
+      <div class="order-2 md:order-1">
+        <p class="mono text-[var(--navy)]/60 text-xs tracking-[0.25em] uppercase mb-4">Məhsulumuz</p>
+        <h2 class="display text-3xl md:text-4xl font-semibold mb-5" style="color:var(--navy-deep);">19 Litrlik Bulaq Suyu</h2>
+        <p class="text-[var(--ink)]/75 leading-relaxed mb-6">
+          Hər bidon laboratoriya nəzarətindən keçir, möhürlü qapaqla bağlanır və soyuducu/dispenser üçün standart ölçüdə hazırlanır.
+          Şəhər daxilində sürətli çatdırılma, boş bidonların geri qəbulu.
+        </p>
+        <ul class="space-y-3 text-sm">
+          <li class="flex items-center gap-3"><span class="w-2 h-2 rounded-full" style="background:var(--aqua);"></span>BPA-free plastik bidon</li>
+          <li class="flex items-center gap-3"><span class="w-2 h-2 rounded-full" style="background:var(--aqua);"></span>Möhürlənmiş, tək-istifadəlik qapaq</li>
+          <li class="flex items-center gap-3"><span class="w-2 h-2 rounded-full" style="background:var(--aqua);"></span>Eyni gün ərzində çatdırılma</li>
+        </ul>
+      </div>
+      <div class="order-1 md:order-2 card-hover rounded-3xl p-10 flex items-center justify-center" style="background:linear-gradient(160deg, #fff, var(--mist));border:1px solid #E1F3F1;">
+        <svg width="140" height="220" viewBox="0 0 200 300">
+          <path d="M70 10 H130 V40 C130 50 145 55 145 80 V270 C145 285 130 295 115 295 H85 C70 295 55 285 55 270 V80 C55 55 70 50 70 40 Z"
+            fill="#EAF8F6" stroke="var(--navy)" stroke-width="3"/>
+          <rect x="65" y="120" width="70" height="160" rx="6" fill="var(--aqua)" opacity="0.55"/>
+          <text x="100" y="170" text-anchor="middle" class="mono" font-size="18" fill="var(--navy-deep)" font-weight="700">19L</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- NİYƏ BİZ -->
+  <section id="niye-biz" class="py-20 md:py-28" style="background:#fff;">
+    <div class="max-w-6xl mx-auto px-5 md:px-8">
+      <div class="reveal text-center max-w-xl mx-auto mb-14">
+        <p class="mono text-[var(--navy)]/60 text-xs tracking-[0.25em] uppercase mb-4">Niyə Özəl Su</p>
+        <h2 class="display text-3xl md:text-4xl font-semibold" style="color:var(--navy-deep);">Sadə, sürətli, etibarlı</h2>
+      </div>
+      <div class="grid sm:grid-cols-3 gap-6">
+        <div class="reveal card-hover rounded-2xl p-7" style="background:var(--mist);">
+          <div class="w-11 h-11 rounded-xl flex items-center justify-center mb-5" style="background:var(--navy);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#2EC4B6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 class="font-semibold text-lg mb-2" style="color:var(--navy-deep);">Təmizlik nəzarəti</h3>
+          <p class="text-sm text-[var(--ink)]/70 leading-relaxed">Hər partiya doldurulmadan əvvəl yoxlanılır.</p>
+        </div>
+        <div class="reveal card-hover rounded-2xl p-7" style="background:var(--mist);">
+          <div class="w-11 h-11 rounded-xl flex items-center justify-center mb-5" style="background:var(--navy);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 7v5l3 3" stroke="#2EC4B6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" stroke="#2EC4B6" stroke-width="2"/></svg>
+          </div>
+          <h3 class="font-semibold text-lg mb-2" style="color:var(--navy-deep);">Sürətli çatdırılma</h3>
+          <p class="text-sm text-[var(--ink)]/70 leading-relaxed">Sifariş ediləndən bir neçə saat ərzində qapınızda.</p>
+        </div>
+        <div class="reveal card-hover rounded-2xl p-7" style="background:var(--mist);">
+          <div class="w-11 h-11 rounded-xl flex items-center justify-center mb-5" style="background:var(--navy);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 12l2-2 4 4 8-8 2 2-10 10z" fill="#2EC4B6"/></svg>
+          </div>
+          <h3 class="font-semibold text-lg mb-2" style="color:var(--navy-deep);">Sadə qiymət</h3>
+          <p class="text-sm text-[var(--ink)]/70 leading-relaxed">Gizli xərc yoxdur, boş bidon geri alınır.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QİYMƏT + SİFARİŞ -->
+  <section id="qiymet" class="max-w-6xl mx-auto px-5 md:px-8 py-20 md:py-28">
+    <div class="reveal text-center max-w-xl mx-auto mb-14">
+      <p class="mono text-[var(--navy)]/60 text-xs tracking-[0.25em] uppercase mb-4">Qiymət</p>
+      <h2 class="display text-3xl md:text-4xl font-semibold" style="color:var(--navy-deep);">Aydın və sadə</h2>
+    </div>
+    <div class="reveal max-w-md mx-auto rounded-3xl p-10 text-center card-hover" style="background:var(--navy);">
+      <p class="mono text-[var(--aqua-light)] text-xs tracking-[0.2em] uppercase mb-3">19 Litr bidon</p>
+      <p class="display text-white text-5xl font-bold mb-2"><span id="priceShow">3.50</span> <span class="text-2xl font-medium">AZN</span></p>
+      <p class="text-white/60 text-sm mb-7">Çatdırılma daxildir · Şəhər daxilində</p>
+      <a href="#sifaris" class="btn-primary inline-block px-8 py-3.5 rounded-full w-full">İndi sifariş et</a>
+    </div>
+  </section>
+
+  <!-- SİFARİŞ FORMU -->
+  <section id="sifaris" class="py-20 md:py-28" style="background:linear-gradient(180deg, var(--mist), #fff);">
+    <div class="max-w-2xl mx-auto px-5 md:px-8">
+      <div class="reveal text-center mb-12">
+        <p class="mono text-[var(--navy)]/60 text-xs tracking-[0.25em] uppercase mb-4">Sifariş</p>
+        <h2 class="display text-3xl md:text-4xl font-semibold" style="color:var(--navy-deep);">Sifarişinizi göndərin</h2>
+        <p class="text-[var(--ink)]/70 mt-3">Forma doldurun, birbaşa WhatsApp-a yönləndirilirsiniz.</p>
+      </div>
+      <form id="orderForm" class="reveal bg-white rounded-3xl p-8 md:p-10 shadow-[0_20px_50px_-20px_rgba(11,61,85,0.18)] space-y-5">
+        <div>
+          <label class="block text-sm font-medium mb-2" style="color:var(--navy-deep);">Adınız</label>
+          <input required type="text" id="ordName" class="w-full px-4 py-3 rounded-xl border border-[#DCEEEC] bg-[var(--mist)]" placeholder="Ad Soyad">
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-2" style="color:var(--navy-deep);">Telefon</label>
+          <input required type="tel" id="ordPhone" class="w-full px-4 py-3 rounded-xl border border-[#DCEEEC] bg-[var(--mist)]" placeholder="+994 XX XXX XX XX">
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium mb-2" style="color:var(--navy-deep);">Bidon sayı</label>
+            <input required type="number" min="1" value="1" id="ordQty" class="w-full px-4 py-3 rounded-xl border border-[#DCEEEC] bg-[var(--mist)]">
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-2" style="color:var(--navy-deep);">Ünvan</label>
+            <input required type="text" id="ordAddr" class="w-full px-4 py-3 rounded-xl border border-[#DCEEEC] bg-[var(--mist)]" placeholder="Rayon, küçə">
+          </div>
+        </div>
+        <button type="submit" class="btn-primary w-full py-4 rounded-xl text-base">WhatsApp ilə göndər</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ƏLAQƏ -->
+  <section id="elaqe" class="max-w-6xl mx-auto px-5 md:px-8 pb-24">
+    <div class="reveal grid sm:grid-cols-3 gap-6 text-center">
+      <div class="rounded-2xl p-7" style="background:var(--mist);">
+        <p class="text-xs mono uppercase tracking-widest mb-2 text-[var(--navy)]/60">Telefon</p>
+        <p class="font-semibold" style="color:var(--navy-deep);" id="contactPhone">+994 50 000 00 00</p>
+      </div>
+      <div class="rounded-2xl p-7" style="background:var(--mist);">
+        <p class="text-xs mono uppercase tracking-widest mb-2 text-[var(--navy)]/60">İş saatları</p>
+        <p class="font-semibold" style="color:var(--navy-deep);">09:00 – 20:00</p>
+      </div>
+      <div class="rounded-2xl p-7" style="background:var(--mist);">
+        <p class="text-xs mono uppercase tracking-widest mb-2 text-[var(--navy)]/60">Ərazi</p>
+        <p class="font-semibold" style="color:var(--navy-deep);">Bakı və ətrafı</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-10" style="background:var(--navy-deep);">
+    <div class="max-w-6xl mx-auto px-5 md:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-white/60 text-sm">
+      <p>© <span id="yr"></span> Özəl Su. Bütün hüquqlar qorunur.</p>
+      <div class="flex items-center gap-2">
+        <img id="footerLogo" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24'%3E%3Cpath d='M12 2C12 2 5 11.5 5 16a7 7 0 0 0 14 0C19 11.5 12 2 12 2Z' fill='%232EC4B6'/%3E%3C/svg%3E" class="cursor-pointer select-none" title="">
+        <span>By <a href="https://instagram.com/s_akhundoff" target="_blank" rel="noopener" class="hover:text-white transition underline decoration-dotted">s_akhundoff</a></span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ============ ADMIN PANEL ============ -->
+<div id="adminRoot">
+  <!-- LOGIN -->
+  <div id="adminLogin" class="min-h-screen flex items-center justify-center px-5" style="background:linear-gradient(180deg, var(--navy-deep), var(--navy));">
+    <div class="bg-white rounded-3xl p-8 md:p-10 w-full max-w-sm shadow-2xl">
+      <h2 class="display text-2xl font-semibold mb-1" style="color:var(--navy-deep);">Admin Panel</h2>
+      <p class="text-sm text-[var(--ink)]/60 mb-6">Özəl Su · Satış/Alış qeydiyyatı</p>
+      <input id="adminPass" type="password" placeholder="Şifrə" class="w-full px-4 py-3 rounded-xl border border-[#DCEEEC] bg-[var(--mist)] mb-3">
+      <p id="loginErr" class="text-red-500 text-xs mb-3 hidden">Şifrə yanlışdır.</p>
+      <button onclick="tryLogin()" class="btn-primary w-full py-3 rounded-xl">Daxil ol</button>
+      <button onclick="closeAdmin()" class="w-full py-3 mt-2 text-sm text-[var(--ink)]/50 hover:text-[var(--ink)]">← Sayta qayıt</button>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div id="adminApp" class="hidden min-h-screen" style="background:var(--mist);">
+    <header class="sticky top-0 z-30 bg-white border-b border-[#E1F3F1]">
+      <div class="max-w-6xl mx-auto px-5 md:px-8 h-16 flex items-center justify-between">
+        <span class="display font-semibold text-lg" style="color:var(--navy-deep);">Özəl Su · Admin</span>
+        <div class="flex items-center gap-2">
+          <button onclick="closeAdmin()" class="text-sm px-4 py-2 rounded-full border border-[#DCEEEC] hover:bg-[var(--mist)]">Sayta qayıt</button>
+          <button onclick="logoutAdmin()" class="text-sm px-4 py-2 rounded-full text-white" style="background:var(--navy);">Çıxış</button>
+        </div>
+      </div>
+      <div class="max-w-6xl mx-auto px-5 md:px-8 flex gap-2 pb-3 overflow-x-auto">
+        <button class="tabBtn px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap" data-tab="dash">Dashboard</button>
+        <button class="tabBtn px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap" data-tab="sales">Satışlar</button>
+        <button class="tabBtn px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap" data-tab="purch">Alışlar</button>
+        <button class="tabBtn px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap" data-tab="settings">Tənzimləmələr</button>
+      </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-5 md:px-8 py-8">
+
+      <!-- DASH TAB -->
+      <div id="tab-dash" class="tabPane space-y-6">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-white rounded-2xl p-6 card-hover border border-[#E1F3F1]">
+            <p class="text-xs uppercase tracking-widest text-[var(--ink)]/50 mb-2">Cari stok</p>
+            <p class="mono text-3xl font-bold" style="color:var(--navy-deep);" id="statStock">0</p>
+            <p class="text-xs text-[var(--ink)]/50 mt-1">bidon (19L)</p>
+          </div>
+          <div class="bg-white rounded-2xl p-6 card-hover border border-[#E1F3F1]">
+            <p class="text-xs uppercase tracking-widest text-[var(--ink)]/50 mb-2">Ümumi gəlir</p>
+            <p class="mono text-3xl font-bold" style="color:var(--aqua);" id="statRevenue">0</p>
+            <p class="text-xs text-[var(--ink)]/50 mt-1">AZN</p>
+          </div>
+          <div class="bg-white rounded-2xl p-6 card-hover border border-[#E1F3F1]">
+            <p class="text-xs uppercase tracking-widest text-[var(--ink)]/50 mb-2">Ümumi xərc</p>
+            <p class="mono text-3xl font-bold text-red-500" id="statExpense">0</p>
+            <p class="text-xs text-[var(--ink)]/50 mt-1">AZN</p>
+          </div>
+          <div class="bg-white rounded-2xl p-6 card-hover border border-[#E1F3F1]">
+            <p class="text-xs uppercase tracking-widest text-[var(--ink)]/50 mb-2">Xalis mənfəət</p>
+            <p class="mono text-3xl font-bold" style="color:var(--navy);" id="statProfit">0</p>
+            <p class="text-xs text-[var(--ink)]/50 mt-1">AZN</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 border border-[#E1F3F1]">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-semibold" style="color:var(--navy-deep);">Son əməliyyatlar</h3>
+          </div>
+          <div id="recentList" class="space-y-2 text-sm"></div>
+        </div>
+      </div>
+
+      <!-- SALES TAB -->
+      <div id="tab-sales" class="tabPane hidden space-y-6">
+        <div class="bg-white rounded-2xl p-6 border border-[#E1F3F1]">
+          <h3 class="font-semibold mb-4" style="color:var(--navy-deep);">Yeni satış qeydiyyatı</h3>
+          <form id="saleForm" class="grid sm:grid-cols-5 gap-3">
+            <input required type="date" id="sDate" class="px-3 py-2.5 rounded-xl border border-[#DCEEEC] bg-[var(--mist)] sm:col-span-1">
+            <input required type="text" id="sCustomer" placeholder="Müştəri adı" class="px-3 py-2.5 rounded-xl border border-[#DCEEEC] bg-[var(--mist)] sm:col-span-2">
+            <input required type="number" min="1" id="sQty" placeholder="Ədəd" class="px-3 py-2.5 rounded-xl border border-[#DCEEEC] bg-[var(--mist)]">
+            <input required type="number" min="0" step="0.01" id="sPrice" placeholder="Qiymət/ədəd" class="px-3 py-2.5 rounded-xl border border-[#DCEEEC] bg-[var(--mist)]">
+            <button type="submit" class="btn-primary rounded-xl px-4 py-2.5 sm:col-span-5">+ Əlavə et</button>
+          </form>
+        </div>
+        <div class="bg-white rounded-2xl border border-[#E1F3F1] overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead><tr class="text-left text-[var(--ink)]/50 text-xs uppercase tracking-wide">
+              <th class="px-5 py-3">Tarix</th><th class="px-5 py-3">Müştəri</th><th class="px-5 py-3">Ədəd</th><th class="px-5 py-3">Qiymət</th><th class="px-5 py-3">Cəm</th><th class="px-5 py-3"></th>
+            </tr></thead>
+            <tbody id="salesTable"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PURCHASE TAB -->
+      <div id="tab-purch" class="tabPane hidden space-y-6">
+        <div class="bg-white rounded-2xl p-6 border border-[#E1F3F1]">
+          <h3 class="font-semibold mb-4" style="color:var(--navy-deep);">Yeni alış qeydiyyatı</h3>
+          <form id="purchForm" class="grid sm:grid-cols-5 gap-3">
+            <input required type="date" id="pDate" class="px-3 py-2.5 rounded-xl border border-[#DCEEEC] bg-[var(--mist)] sm:col-span-1">
+            <input required type="text" id="pSupplier" placeholder="Tədarükçü" class="px-3 py-2.5 rounded-xl border border-[#DCEEEC] bg-[var(--mist)] sm:col-span-2">
+            <input required type="number" min="1" id="pQty" placeholder="Ədəd" class="px-3 py-2.5 rounded-xl border border-[#DCEEEC] bg-[var(--mist)]">
+            <input required type="number" min="0" step="0.01" id="pPrice" placeholder="Qiymət/ədəd" class="px-3 py-2.5 rounded-xl border border-[#DCEEEC] bg-[var(--mist)]">
+            <button type="submit" class="btn-primary rounded-xl px-4 py-2.5 sm:col-span-5">+ Əlavə et</button>
+          </form>
+        </div>
+        <div class="bg-white rounded-2xl border border-[#E1F3F1] overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead><tr class="text-left text-[var(--ink)]/50 text-xs uppercase tracking-wide">
+              <th class="px-5 py-3">Tarix</th><th class="px-5 py-3">Tədarükçü</th><th class="px-5 py-3">Ədəd</th><th class="px-5 py-3">Qiymət</th><th class="px-5 py-3">Cəm</th><th class="px-5 py-3"></th>
+            </tr></thead>
+            <tbody id="purchTable"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SETTINGS TAB -->
+      <div id="tab-settings" class="tabPane hidden space-y-6">
+        <div class="bg-white rounded-2xl p-6 border border-[#E1F3F1] max-w-md">
+          <h3 class="font-semibold mb-4" style="color:var(--navy-deep);">Sayt qiyməti</h3>
+          <label class="block text-sm mb-2">19L bidon qiyməti (AZN)</label>
+          <input type="number" step="0.01" id="setPrice" class="w-full px-4 py-3 rounded-xl border border-[#DCEEEC] bg-[var(--mist)] mb-4">
+          <label class="block text-sm mb-2">Əlaqə telefonu</label>
+          <input type="text" id="setPhone" class="w-full px-4 py-3 rounded-xl border border-[#DCEEEC] bg-[var(--mist)] mb-4">
+          <button onclick="saveSettings()" class="btn-primary px-6 py-3 rounded-xl">Yadda saxla</button>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-[#E1F3F1] max-w-md">
+          <h3 class="font-semibold mb-2" style="color:var(--navy-deep);">Məlumatları ehtiyat nüsxələ</h3>
+          <p class="text-xs text-[var(--ink)]/50 mb-4">Bütün satış/alış qeydləri bu brauzerdə saxlanılır. Başqa cihazda görmək üçün ixrac edib idxal edin.</p>
+          <div class="flex gap-3 flex-wrap">
+            <button onclick="exportData()" class="px-5 py-2.5 rounded-xl border border-[#DCEEEC] text-sm font-medium hover:bg-[var(--mist)]">JSON ixrac et</button>
+            <label class="px-5 py-2.5 rounded-xl border border-[#DCEEEC] text-sm font-medium hover:bg-[var(--mist)] cursor-pointer">
+              JSON idxal et <input type="file" id="importFile" accept=".json" class="hidden">
+            </label>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-[#E1F3F1] max-w-md">
+          <h3 class="font-semibold mb-2" style="color:var(--navy-deep);">Admin şifrəsini dəyiş</h3>
+          <input type="password" id="newPass" placeholder="Yeni şifrə" class="w-full px-4 py-3 rounded-xl border border-[#DCEEEC] bg-[var(--mist)] mb-4">
+          <button onclick="changePassword()" class="btn-primary px-6 py-3 rounded-xl">Şifrəni yenilə</button>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<script>
+/* ================= UTILS ================= */
+const LS = {
+  get(k, d){ try{ return JSON.parse(localStorage.getItem(k)) ?? d; }catch(e){ return d; } },
+  set(k, v){ localStorage.setItem(k, JSON.stringify(v)); }
+};
+const fmt = n => Number(n||0).toLocaleString('az-AZ', {minimumFractionDigits:2, maximumFractionDigits:2});
+
+/* ================= REVEAL ON SCROLL ================= */
+const io = new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+},{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ================= HERO BOTTLE FILL ================= */
+window.addEventListener('DOMContentLoaded', ()=>{
+  const fill = document.getElementById('bottleFill');
+  let h = 0;
+  const target = 165;
+  const grow = setInterval(()=>{
+    h += 5;
+    if(h>=target){ h=target; clearInterval(grow); }
+    fill.setAttribute('y', 280 - h);
+    fill.setAttribute('height', h);
+  }, 28);
+  document.getElementById('yr').textContent = new Date().getFullYear();
+});
+
+/* ================= SETTINGS (public) ================= */
+function loadPublicSettings(){
+  const price = LS.get('os_price', 3.50);
+  const phone = LS.get('os_phone', '+994 50 000 00 00');
+  document.getElementById('priceShow').textContent = fmt(price);
+  document.getElementById('contactPhone').textContent = phone;
+}
+loadPublicSettings();
+
+/* ================= ORDER FORM -> WHATSAPP ================= */
+document.getElementById('orderForm').addEventListener('submit', e=>{
+  e.preventDefault();
+  const name = document.getElementById('ordName').value;
+  const phone = document.getElementById('ordPhone').value;
+  const qty = document.getElementById('ordQty').value;
+  const addr = document.getElementById('ordAddr').value;
+  const waPhone = (LS.get('os_phone','+994500000000')).replace(/[^0-9]/g,'');
+  const price = LS.get('os_price', 3.50);
+  const total = (price*qty).toFixed(2);
+  const msg = `Salam! Sifariş vermək istəyirəm:%0A%0AAd: ${name}%0ATelefon: ${phone}%0ABidon sayı: ${qty}%0AÜnvan: ${addr}%0ATəxmini məbləğ: ${total} AZN`;
+  window.open(`https://wa.me/${waPhone}?text=${msg}`, '_blank');
+});
+
+/* ================= ADMIN ACCESS (footer logo 5-tap) ================= */
+let tapCount = 0, tapTimer = null;
+document.getElementById('footerLogo').addEventListener('click', ()=>{
+  tapCount++;
+  clearTimeout(tapTimer);
+  tapTimer = setTimeout(()=> tapCount = 0, 1500);
+  if(tapCount >= 5){
+    tapCount = 0;
+    openAdmin();
+  }
+});
+function openAdmin(){
+  document.getElementById('siteRoot').style.display='none';
+  document.getElementById('adminRoot').style.display='block';
+  if(sessionStorage.getItem('os_admin_ok') === '1'){
+    showAdminApp();
+  } else {
+    document.getElementById('adminLogin').style.display='flex';
+    document.getElementById('adminApp').classList.add('hidden');
+  }
+}
+function closeAdmin(){
+  document.getElementById('adminRoot').style.display='none';
+  document.getElementById('siteRoot').style.display='block';
+}
+function tryLogin(){
+  const val = document.getElementById('adminPass').value;
+  const real = LS.get('os_admin_pass', 'ozelsu2026');
+  if(val === real){
+    sessionStorage.setItem('os_admin_ok','1');
+    showAdminApp();
+  } else {
+    document.getElementById('loginErr').classList.remove('hidden');
+  }
+}
+function logoutAdmin(){
+  sessionStorage.removeItem('os_admin_ok');
+  closeAdmin();
+}
+function showAdminApp(){
+  document.getElementById('adminLogin').style.display='none';
+  document.getElementById('adminApp').classList.remove('hidden');
+  document.getElementById('setPrice').value = LS.get('os_price', 3.50);
+  document.getElementById('setPhone').value = LS.get('os_phone', '+994 50 000 00 00');
+  document.getElementById('sDate').valueAsDate = new Date();
+  document.getElementById('pDate').valueAsDate = new Date();
+  switchTab('dash');
+  renderAll();
+}
+
+/* allow URL #admin to open panel directly too */
+if(location.hash === '#admin'){ openAdmin(); }
+
+/* ================= TABS ================= */
+document.querySelectorAll('.tabBtn').forEach(btn=>{
+  btn.addEventListener('click', ()=> switchTab(btn.dataset.tab));
+});
+function switchTab(tab){
+  document.querySelectorAll('.tabPane').forEach(p=>p.classList.add('hidden'));
+  document.getElementById('tab-'+tab).classList.remove('hidden');
+  document.querySelectorAll('.tabBtn').forEach(b=>{
+    b.classList.toggle('tab-active', b.dataset.tab===tab);
+    if(b.dataset.tab!==tab) b.classList.remove('tab-active');
+  });
+}
+
+/* ================= DATA MODEL ================= */
+function getSales(){ return LS.get('os_sales', []); }
+function getPurch(){ return LS.get('os_purch', []); }
+function saveSales(d){ LS.set('os_sales', d); }
+function savePurch(d){ LS.set('os_purch', d); }
+
+document.getElementById('saleForm').addEventListener('submit', e=>{
+  e.preventDefault();
+  const sales = getSales();
+  sales.unshift({
+    id: Date.now(),
+    date: document.getElementById('sDate').value,
+    customer: document.getElementById('sCustomer').value,
+    qty: Number(document.getElementById('sQty').value),
+    price: Number(document.getElementById('sPrice').value)
+  });
+  saveSales(sales);
+  e.target.reset();
+  document.getElementById('sDate').valueAsDate = new Date();
+  renderAll();
+});
+
+document.getElementById('purchForm').addEventListener('submit', e=>{
+  e.preventDefault();
+  const purch = getPurch();
+  purch.unshift({
+    id: Date.now(),
+    date: document.getElementById('pDate').value,
+    supplier: document.getElementById('pSupplier').value,
+    qty: Number(document.getElementById('pQty').value),
+    price: Number(document.getElementById('pPrice').value)
+  });
+  savePurch(purch);
+  e.target.reset();
+  document.getElementById('pDate').valueAsDate = new Date();
+  renderAll();
+});
+
+function deleteSale(id){
+  saveSales(getSales().filter(s=>s.id!==id));
+  renderAll();
+}
+function deletePurch(id){
+  savePurch(getPurch().filter(p=>p.id!==id));
+  renderAll();
+}
+
+/* ================= RENDER ================= */
+function renderAll(){
+  const sales = getSales();
+  const purch = getPurch();
+
+  const totalSoldQty = sales.reduce((a,s)=>a+s.qty,0);
+  const totalBoughtQty = purch.reduce((a,p)=>a+p.qty,0);
+  const revenue = sales.reduce((a,s)=>a+s.qty*s.price,0);
+  const expense = purch.reduce((a,p)=>a+p.qty*p.price,0);
+  const stock = totalBoughtQty - totalSoldQty;
+  const profit = revenue - expense;
+
+  document.getElementById('statStock').textContent = stock;
+  document.getElementById('statRevenue').textContent = fmt(revenue);
+  document.getElementById('statExpense').textContent = fmt(expense);
+  document.getElementById('statProfit').textContent = fmt(profit);
+
+  // sales table
+  const sTbody = document.getElementById('salesTable');
+  sTbody.innerHTML = sales.map(s=>`
+    <tr class="border-t border-[#F0F7F6]">
+      <td class="px-5 py-3 mono text-xs">${s.date}</td>
+      <td class="px-5 py-3">${s.customer}</td>
+      <td class="px-5 py-3">${s.qty}</td>
+      <td class="px-5 py-3 mono">${fmt(s.price)}</td>
+      <td class="px-5 py-3 mono font-semibold">${fmt(s.qty*s.price)}</td>
+      <td class="px-5 py-3"><button onclick="deleteSale(${s.id})" class="text-red-400 hover:text-red-600 text-xs">Sil</button></td>
+    </tr>`).join('') || `<tr><td colspan="6" class="px-5 py-8 text-center text-[var(--ink)]/40">Hələ satış yoxdur</td></tr>`;
+
+  // purchase table
+  const pTbody = document.getElementById('purchTable');
+  pTbody.innerHTML = purch.map(p=>`
+    <tr class="border-t border-[#F0F7F6]">
+      <td class="px-5 py-3 mono text-xs">${p.date}</td>
+      <td class="px-5 py-3">${p.supplier}</td>
+      <td class="px-5 py-3">${p.qty}</td>
+      <td class="px-5 py-3 mono">${fmt(p.price)}</td>
+      <td class="px-5 py-3 mono font-semibold">${fmt(p.qty*p.price)}</td>
+      <td class="px-5 py-3"><button onclick="deletePurch(${p.id})" class="text-red-400 hover:text-red-600 text-xs">Sil</button></td>
+    </tr>`).join('') || `<tr><td colspan="6" class="px-5 py-8 text-center text-[var(--ink)]/40">Hələ alış yoxdur</td></tr>`;
+
+  // recent
+  const recent = [...sales.map(s=>({...s,type:'sale'})), ...purch.map(p=>({...p,type:'purch'}))]
+    .sort((a,b)=> b.id - a.id).slice(0,6);
+  document.getElementById('recentList').innerHTML = recent.map(r=>`
+    <div class="flex items-center justify-between py-2 border-b border-[#F0F7F6] last:border-0">
+      <div class="flex items-center gap-3">
+        <span class="w-2 h-2 rounded-full" style="background:${r.type==='sale'?'#2EC4B6':'#0B3D55'}"></span>
+        <span>${r.type==='sale' ? 'Satış — '+r.customer : 'Alış — '+r.supplier}</span>
+      </div>
+      <span class="mono text-[var(--ink)]/60">${r.qty} ədəd · ${r.date}</span>
+    </div>`).join('') || `<p class="text-[var(--ink)]/40 text-center py-6">Hələ məlumat yoxdur</p>`;
+}
+
+/* ================= SETTINGS ACTIONS ================= */
+function saveSettings(){
+  LS.set('os_price', Number(document.getElementById('setPrice').value));
+  LS.set('os_phone', document.getElementById('setPhone').value);
+  loadPublicSettings();
+  alert('Yadda saxlanıldı!');
+}
+function changePassword(){
+  const np = document.getElementById('newPass').value;
+  if(np.length < 4){ alert('Şifrə ən azı 4 simvol olmalıdır.'); return; }
+  LS.set('os_admin_pass', np);
+  document.getElementById('newPass').value='';
+  alert('Şifrə yeniləndi!');
+}
+function exportData(){
+  const data = { sales: getSales(), purch: getPurch(), price: LS.get('os_price',3.50), phone: LS.get('os_phone','') };
+  const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `ozelsu-data-${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+}
+document.getElementById('importFile').addEventListener('change', e=>{
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ev=>{
+    try{
+      const data = JSON.parse(ev.target.result);
+      if(data.sales) saveSales(data.sales);
+      if(data.purch) savePurch(data.purch);
+      if(data.price) LS.set('os_price', data.price);
+      if(data.phone) LS.set('os_phone', data.phone);
+      loadPublicSettings();
+      renderAll();
+      alert('Məlumatlar uğurla idxal edildi!');
+    }catch(err){ alert('Fayl oxunmadı, formatı yoxlayın.'); }
+  };
+  reader.readAsText(file);
+});
+</script>
+</body>
+</html>
