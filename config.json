@@ -1,0 +1,12 @@
+{
+  "phone": "+994 70 204 55 52",
+  "products": [
+    {
+      "id": "p_main_19l",
+      "name": "19L Bidon Su",
+      "price": 2.50,
+      "image": "assets/gym_ad.jpg",
+      "active": true
+    }
+  ]
+}
