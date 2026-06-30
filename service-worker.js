@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ozelsu-v2';
+const CACHE_NAME = 'ozelsu-v3';
 const CORE_ASSETS = [
   '/ozelsu/',
   '/ozelsu/index.html',
