@@ -231,6 +231,7 @@
         <img src="assets/gym_ad.jpg" alt="Özəl Su 19L bidon" class="w-full h-full object-cover" style="min-height:340px;">
       </div>
     </div>
+    <div id="publicProductsGrid" class="hidden grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-12"></div>
   </section>
 
   <!-- HAQQIMIZDA -->
@@ -429,6 +430,18 @@
     </div>
   </div>
 
+  <!-- NİSYƏ POPUP -->
+  <div id="nisyeModal" class="hidden fixed inset-0 z-[200] flex items-center justify-center px-5" style="background:rgba(7,59,76,0.75);">
+    <div class="bg-white rounded-3xl p-7 w-full max-w-sm shadow-2xl">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="text-3xl">⚠️</span>
+        <h3 class="font-semibold text-lg" style="color:var(--navy-deep);">Nisyə xəbərdarlığı!</h3>
+      </div>
+      <div id="nisyeModalList" class="space-y-2 text-sm mb-5 max-h-64 overflow-y-auto"></div>
+      <button onclick="closeNisyeModal()" class="btn-primary w-full py-3 rounded-xl">Anladım</button>
+    </div>
+  </div>
+
   <!-- DASHBOARD -->
   <div id="adminApp" class="hidden min-h-screen" style="background:var(--mist);">
     <header class="sticky top-0 z-30 bg-white border-b border-[#E1F3F1]">
@@ -443,6 +456,8 @@
         <button class="tabBtn px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap" data-tab="dash">Dashboard</button>
         <button class="tabBtn px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap" data-tab="sales">Satışlar</button>
         <button class="tabBtn px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap" data-tab="purch">Alışlar</button>
+        <button class="tabBtn px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap" data-tab="products">Məhsullar</button>
+        <button class="tabBtn px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap" data-tab="reports">Hesabatlar</button>
         <button class="tabBtn px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap" data-tab="settings">Tənzimləmələr</button>
       </div>
     </header>
@@ -451,6 +466,7 @@
 
       <!-- DASH TAB -->
       <div id="tab-dash" class="tabPane space-y-6">
+        <div id="nisyeBanner"></div>
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div class="bg-white rounded-2xl p-6 card-hover border border-[#E1F3F1]">
             <p class="text-xs uppercase tracking-widest text-[var(--ink)]/50 mb-2">Cari stok</p>
@@ -491,13 +507,18 @@
             <input required type="text" id="sCustomer" placeholder="Müştəri adı" class="px-3 py-2.5 rounded-xl border border-[#DCEEEC] bg-[var(--mist)] sm:col-span-2">
             <input required type="number" min="1" id="sQty" placeholder="Ədəd" class="px-3 py-2.5 rounded-xl border border-[#DCEEEC] bg-[var(--mist)]">
             <input required type="number" min="0" step="0.01" id="sPrice" placeholder="Qiymət/ədəd" class="px-3 py-2.5 rounded-xl border border-[#DCEEEC] bg-[var(--mist)]">
-            <button type="submit" class="btn-primary rounded-xl px-4 py-2.5 sm:col-span-5">+ Əlavə et</button>
+            <label class="flex items-center gap-2 px-3 py-2.5 rounded-xl border border-[#DCEEEC] bg-[var(--mist)] sm:col-span-2 cursor-pointer select-none">
+              <input type="checkbox" id="sNisye" class="w-4 h-4 accent-[var(--navy)]">
+              <span class="text-sm">💳 Nisyədir (pul sonra ödənəcək)</span>
+            </label>
+            <button type="submit" class="btn-primary rounded-xl px-4 py-2.5 sm:col-span-3">+ Əlavə et</button>
           </form>
         </div>
+        <div id="nisyeSalesBox"></div>
         <div class="bg-white rounded-2xl border border-[#E1F3F1] overflow-x-auto">
           <table class="w-full text-sm">
             <thead><tr class="text-left text-[var(--ink)]/50 text-xs uppercase tracking-wide">
-              <th class="px-5 py-3">Tarix</th><th class="px-5 py-3">Müştəri</th><th class="px-5 py-3">Ədəd</th><th class="px-5 py-3">Qiymət</th><th class="px-5 py-3">Cəm</th><th class="px-5 py-3"></th>
+              <th class="px-5 py-3">Tarix</th><th class="px-5 py-3">Müştəri</th><th class="px-5 py-3">Ədəd</th><th class="px-5 py-3">Qiymət</th><th class="px-5 py-3">Cəm</th><th class="px-5 py-3">Status</th><th class="px-5 py-3"></th>
             </tr></thead>
             <tbody id="salesTable"></tbody>
           </table>
@@ -513,21 +534,78 @@
             <input required type="text" id="pSupplier" placeholder="Tədarükçü" class="px-3 py-2.5 rounded-xl border border-[#DCEEEC] bg-[var(--mist)] sm:col-span-2">
             <input required type="number" min="1" id="pQty" placeholder="Ədəd" class="px-3 py-2.5 rounded-xl border border-[#DCEEEC] bg-[var(--mist)]">
             <input required type="number" min="0" step="0.01" id="pPrice" placeholder="Qiymət/ədəd" class="px-3 py-2.5 rounded-xl border border-[#DCEEEC] bg-[var(--mist)]">
-            <button type="submit" class="btn-primary rounded-xl px-4 py-2.5 sm:col-span-5">+ Əlavə et</button>
+            <label class="flex items-center gap-2 px-3 py-2.5 rounded-xl border border-[#DCEEEC] bg-[var(--mist)] sm:col-span-2 cursor-pointer select-none">
+              <input type="checkbox" id="pNisye" class="w-4 h-4 accent-[var(--navy)]">
+              <span class="text-sm">💳 Nisyədir (pul sonra ödəniləcək)</span>
+            </label>
+            <button type="submit" class="btn-primary rounded-xl px-4 py-2.5 sm:col-span-3">+ Əlavə et</button>
           </form>
         </div>
+        <div id="nisyePurchBox"></div>
         <div class="bg-white rounded-2xl border border-[#E1F3F1] overflow-x-auto">
           <table class="w-full text-sm">
             <thead><tr class="text-left text-[var(--ink)]/50 text-xs uppercase tracking-wide">
-              <th class="px-5 py-3">Tarix</th><th class="px-5 py-3">Tədarükçü</th><th class="px-5 py-3">Ədəd</th><th class="px-5 py-3">Qiymət</th><th class="px-5 py-3">Cəm</th><th class="px-5 py-3"></th>
+              <th class="px-5 py-3">Tarix</th><th class="px-5 py-3">Tədarükçü</th><th class="px-5 py-3">Ədəd</th><th class="px-5 py-3">Qiymət</th><th class="px-5 py-3">Cəm</th><th class="px-5 py-3">Status</th><th class="px-5 py-3"></th>
             </tr></thead>
             <tbody id="purchTable"></tbody>
           </table>
         </div>
       </div>
 
+      <!-- PRODUCTS TAB -->
+      <div id="tab-products" class="tabPane hidden space-y-6">
+        <div class="bg-white rounded-2xl p-6 border border-[#E1F3F1]">
+          <h3 class="font-semibold mb-1" style="color:var(--navy-deep);">Məhsul əlavə et / redaktə et</h3>
+          <p class="text-xs text-[var(--ink)]/50 mb-4">Şəkil və qiymət dəyişikliyi GitHub-a yüklənir və BÜTÜN müştərilər saytda görür.</p>
+          <form id="productForm" class="grid sm:grid-cols-2 gap-3">
+            <input type="hidden" id="prodId">
+            <input required type="text" id="prodName" placeholder="Məhsul adı (məs: 19L Bidon)" class="px-3 py-2.5 rounded-xl border border-[#DCEEEC] bg-[var(--mist)]">
+            <input required type="number" min="0" step="0.01" id="prodPrice" placeholder="Qiymət (AZN)" class="px-3 py-2.5 rounded-xl border border-[#DCEEEC] bg-[var(--mist)]">
+            <input type="file" id="prodImage" accept="image/*" class="px-3 py-2.5 rounded-xl border border-[#DCEEEC] bg-[var(--mist)] sm:col-span-2">
+            <label class="flex items-center gap-2 px-3 py-2.5 rounded-xl border border-[#DCEEEC] bg-[var(--mist)] cursor-pointer select-none sm:col-span-2">
+              <input type="checkbox" id="prodActive" checked class="w-4 h-4 accent-[var(--navy)]">
+              <span class="text-sm">Saytda göstərilsin (aktiv)</span>
+            </label>
+            <div class="sm:col-span-2 flex gap-3">
+              <button type="submit" class="btn-primary rounded-xl px-5 py-2.5">📤 GitHub-a yüklə</button>
+              <button type="button" onclick="resetProductForm()" class="px-5 py-2.5 rounded-xl border border-[#DCEEEC] text-sm font-medium hover:bg-[var(--mist)]">Təmizlə</button>
+            </div>
+          </form>
+          <p id="prodStatus" class="text-xs mt-3"></p>
+        </div>
+        <div id="productsList" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+      </div>
+
+      <!-- REPORTS TAB -->
+      <div id="tab-reports" class="tabPane hidden space-y-6">
+        <div class="bg-white rounded-2xl p-6 border border-[#E1F3F1]">
+          <h3 class="font-semibold mb-4" style="color:var(--navy-deep);">Hesabat üçün tarix aralığı</h3>
+          <div class="grid sm:grid-cols-3 gap-3">
+            <input type="date" id="repFrom" class="px-3 py-2.5 rounded-xl border border-[#DCEEEC] bg-[var(--mist)]">
+            <input type="date" id="repTo" class="px-3 py-2.5 rounded-xl border border-[#DCEEEC] bg-[var(--mist)]">
+            <button onclick="buildReport()" class="btn-primary rounded-xl px-4 py-2.5">Hesabatı göstər</button>
+          </div>
+        </div>
+        <div id="reportSummary" class="grid sm:grid-cols-3 gap-4"></div>
+        <div class="flex gap-3 flex-wrap">
+          <button onclick="downloadReportCSV('sales')" class="px-5 py-2.5 rounded-xl border border-[#DCEEEC] text-sm font-medium hover:bg-[var(--mist)]">📥 Satışlar CSV</button>
+          <button onclick="downloadReportCSV('purch')" class="px-5 py-2.5 rounded-xl border border-[#DCEEEC] text-sm font-medium hover:bg-[var(--mist)]">📥 Alışlar CSV</button>
+          <button onclick="downloadReportCSV('nisye')" class="px-5 py-2.5 rounded-xl border border-[#DCEEEC] text-sm font-medium hover:bg-[var(--mist)]">📥 Nisyələr CSV</button>
+        </div>
+      </div>
+
       <!-- SETTINGS TAB -->
       <div id="tab-settings" class="tabPane hidden space-y-6">
+        <div class="bg-white rounded-2xl p-6 border border-[#E1F3F1] max-w-md">
+          <h3 class="font-semibold mb-1" style="color:var(--navy-deep);">GitHub bağlantısı</h3>
+          <p class="text-xs text-[var(--ink)]/50 mb-4">Məhsul şəkli/qiymət dəyişiklikləri saytda hamıya görünsün deyə GitHub-a yazılır. Token yalnız bu brauzerdə saxlanılır.</p>
+          <label class="block text-sm mb-2">GitHub repo (owner/repo)</label>
+          <input type="text" id="ghRepo" placeholder="Samir210-az/ozelsu" class="w-full px-4 py-3 rounded-xl border border-[#DCEEEC] bg-[var(--mist)] mb-4">
+          <label class="block text-sm mb-2">GitHub Personal Access Token</label>
+          <input type="password" id="ghToken" placeholder="ghp_..." class="w-full px-4 py-3 rounded-xl border border-[#DCEEEC] bg-[var(--mist)] mb-4">
+          <button onclick="saveGhConfig()" class="btn-primary px-6 py-3 rounded-xl">Yadda saxla</button>
+          <p id="ghStatus" class="text-xs mt-3"></p>
+        </div>
         <div class="bg-white rounded-2xl p-6 border border-[#E1F3F1] max-w-md">
           <h3 class="font-semibold mb-4" style="color:var(--navy-deep);">Sayt qiyməti</h3>
           <label class="block text-sm mb-2">19L bidon qiyməti (AZN)</label>
@@ -651,12 +729,43 @@ if(window.matchMedia('(display-mode: standalone)').matches || window.navigator.s
 
 /* ================= SETTINGS (public) ================= */
 function loadPublicSettings(){
+  // local fallback first (instant paint)
   const price = LS.get('os_price', 2.50);
   const phone = LS.get('os_phone', '+994 70 204 55 52');
   document.getElementById('priceShow').textContent = fmt(price);
   document.getElementById('contactPhone').textContent = phone;
+  // then try live config.json from repo (so ALL visitors see admin's real changes)
+  fetch('config.json', {cache:'no-store'}).then(r=> r.ok ? r.json() : null).then(cfg=>{
+    if(!cfg) return;
+    if(cfg.phone){
+      document.getElementById('contactPhone').textContent = cfg.phone;
+      LS.set('os_phone', cfg.phone);
+    }
+    const activeProducts = (cfg.products||[]).filter(p=>p.active!==false);
+    if(activeProducts.length){
+      const main = activeProducts[0];
+      document.getElementById('priceShow').textContent = fmt(main.price);
+      LS.set('os_price', main.price);
+      renderPublicProducts(activeProducts);
+    }
+  }).catch(()=>{});
 }
 loadPublicSettings();
+
+function renderPublicProducts(products){
+  const wrap = document.getElementById('publicProductsGrid');
+  if(!wrap) return;
+  if(products.length <= 1) return; // single product keeps the original hand-built layout
+  wrap.innerHTML = products.map(p=>`
+    <div class="card-hover rounded-2xl overflow-hidden bg-white" style="border:1px solid #E1F3F1;">
+      <img src="${p.image||'assets/gym_ad.jpg'}" alt="${p.name}" class="w-full h-44 object-cover">
+      <div class="p-5">
+        <h3 class="font-semibold mb-1" style="color:var(--navy-deep);">${p.name}</h3>
+        <p class="mono text-xl font-bold" style="color:var(--aqua);">${fmt(p.price)} AZN</p>
+      </div>
+    </div>`).join('');
+  wrap.classList.remove('hidden');
+}
 
 /* ================= ORDER FORM -> WHATSAPP ================= */
 document.getElementById('orderForm').addEventListener('submit', e=>{
@@ -716,10 +825,18 @@ function showAdminApp(){
   document.getElementById('adminApp').classList.remove('hidden');
   document.getElementById('setPrice').value = LS.get('os_price', 2.50);
   document.getElementById('setPhone').value = LS.get('os_phone', '+994 70 204 55 52');
+  document.getElementById('ghRepo').value = LS.get('gh_repo', 'Samir210-az/ozelsu');
+  document.getElementById('ghToken').value = LS.get('gh_token', '');
   document.getElementById('sDate').valueAsDate = new Date();
   document.getElementById('pDate').valueAsDate = new Date();
+  const today = new Date();
+  const monthStart = new Date(today.getFullYear(), today.getMonth(), 1);
+  document.getElementById('repFrom').valueAsDate = monthStart;
+  document.getElementById('repTo').valueAsDate = today;
   switchTab('dash');
   renderAll();
+  loadProductsAdmin();
+  setTimeout(checkNisyeAlerts, 500);
 }
 
 /* allow URL #admin to open panel directly too */
@@ -747,12 +864,18 @@ function savePurch(d){ LS.set('os_purch', d); }
 document.getElementById('saleForm').addEventListener('submit', e=>{
   e.preventDefault();
   const sales = getSales();
+  const isNisye = document.getElementById('sNisye').checked;
   sales.unshift({
     id: Date.now(),
     date: document.getElementById('sDate').value,
     customer: document.getElementById('sCustomer').value,
     qty: Number(document.getElementById('sQty').value),
-    price: Number(document.getElementById('sPrice').value)
+    price: Number(document.getElementById('sPrice').value),
+    nisye: isNisye,
+    paid: !isNisye,
+    nisyeDate: isNisye ? document.getElementById('sDate').value : null,
+    paidDate: null,
+    lastAlertDate: null
   });
   saveSales(sales);
   e.target.reset();
@@ -763,18 +886,39 @@ document.getElementById('saleForm').addEventListener('submit', e=>{
 document.getElementById('purchForm').addEventListener('submit', e=>{
   e.preventDefault();
   const purch = getPurch();
+  const isNisye = document.getElementById('pNisye').checked;
   purch.unshift({
     id: Date.now(),
     date: document.getElementById('pDate').value,
     supplier: document.getElementById('pSupplier').value,
     qty: Number(document.getElementById('pQty').value),
-    price: Number(document.getElementById('pPrice').value)
+    price: Number(document.getElementById('pPrice').value),
+    nisye: isNisye,
+    paid: !isNisye,
+    nisyeDate: isNisye ? document.getElementById('pDate').value : null,
+    paidDate: null,
+    lastAlertDate: null
   });
   savePurch(purch);
   e.target.reset();
   document.getElementById('pDate').valueAsDate = new Date();
   renderAll();
 });
+
+function markSalePaid(id){
+  const sales = getSales();
+  const item = sales.find(s=>s.id===id);
+  if(item){ item.paid = true; item.paidDate = new Date().toISOString().slice(0,10); }
+  saveSales(sales);
+  renderAll();
+}
+function markPurchPaid(id){
+  const purch = getPurch();
+  const item = purch.find(p=>p.id===id);
+  if(item){ item.paid = true; item.paidDate = new Date().toISOString().slice(0,10); }
+  savePurch(purch);
+  renderAll();
+}
 
 function deleteSale(id){
   saveSales(getSales().filter(s=>s.id!==id));
@@ -786,6 +930,18 @@ function deletePurch(id){
 }
 
 /* ================= RENDER ================= */
+function daysSince(dateStr){
+  if(!dateStr) return 0;
+  const d1 = new Date(dateStr);
+  const d2 = new Date();
+  return Math.floor((d2 - d1) / (1000*60*60*24));
+}
+function getOverdueNisye(){
+  const sales = getSales().filter(s=>s.nisye && !s.paid).map(s=>({...s,type:'sale',who:s.customer}));
+  const purch = getPurch().filter(p=>p.nisye && !p.paid).map(p=>({...p,type:'purch',who:p.supplier}));
+  return [...sales, ...purch].map(n=>({...n, days: daysSince(n.nisyeDate), total: n.qty*n.price}))
+    .sort((a,b)=> b.days - a.days);
+}
 function renderAll(){
   const sales = getSales();
   const purch = getPurch();
@@ -802,29 +958,69 @@ function renderAll(){
   document.getElementById('statExpense').textContent = fmt(expense);
   document.getElementById('statProfit').textContent = fmt(profit);
 
+  // nisyə banner (dashboard top)
+  const overdue = getOverdueNisye();
+  const banner = document.getElementById('nisyeBanner');
+  if(overdue.length){
+    const totalOwed = overdue.reduce((a,n)=>a+n.total,0);
+    banner.innerHTML = `
+      <div class="rounded-2xl p-5 flex items-center justify-between flex-wrap gap-3" style="background:#FFF1F0;border:1px solid #FFD5D2;">
+        <div class="flex items-center gap-3">
+          <span class="text-2xl">⚠️</span>
+          <div>
+            <p class="font-semibold text-red-600">${overdue.length} ödənilməmiş nisyə var</p>
+            <p class="text-xs text-red-500/80">Ümumi: ${fmt(totalOwed)} AZN</p>
+          </div>
+        </div>
+        <button onclick="switchTab('sales')" class="text-xs font-semibold px-4 py-2 rounded-full bg-red-500 text-white hover:bg-red-600">Bax</button>
+      </div>`;
+  } else {
+    banner.innerHTML = '';
+  }
+
   // sales table
   const sTbody = document.getElementById('salesTable');
-  sTbody.innerHTML = sales.map(s=>`
+  sTbody.innerHTML = sales.map(s=>{
+    const isOverdue = s.nisye && !s.paid && daysSince(s.nisyeDate) >= 3;
+    const status = !s.nisye ? `<span class="text-xs px-2 py-1 rounded-full bg-green-50 text-green-600">Ödənilib</span>`
+      : s.paid ? `<span class="text-xs px-2 py-1 rounded-full bg-green-50 text-green-600">Nisyə · ödənildi</span>`
+      : `<span class="text-xs px-2 py-1 rounded-full ${isOverdue?'bg-red-50 text-red-600':'bg-yellow-50 text-yellow-700'}">Nisyə · ${daysSince(s.nisyeDate)} gün</span>`;
+    return `
     <tr class="border-t border-[#F0F7F6]">
       <td class="px-5 py-3 mono text-xs">${s.date}</td>
       <td class="px-5 py-3">${s.customer}</td>
       <td class="px-5 py-3">${s.qty}</td>
       <td class="px-5 py-3 mono">${fmt(s.price)}</td>
       <td class="px-5 py-3 mono font-semibold">${fmt(s.qty*s.price)}</td>
-      <td class="px-5 py-3"><button onclick="deleteSale(${s.id})" class="text-red-400 hover:text-red-600 text-xs">Sil</button></td>
-    </tr>`).join('') || `<tr><td colspan="6" class="px-5 py-8 text-center text-[var(--ink)]/40">Hələ satış yoxdur</td></tr>`;
+      <td class="px-5 py-3">${status}</td>
+      <td class="px-5 py-3 whitespace-nowrap">
+        ${s.nisye && !s.paid ? `<button onclick="markSalePaid(${s.id})" class="text-green-600 hover:text-green-700 text-xs mr-2">Ödə</button>` : ''}
+        <button onclick="deleteSale(${s.id})" class="text-red-400 hover:text-red-600 text-xs">Sil</button>
+      </td>
+    </tr>`;
+  }).join('') || `<tr><td colspan="7" class="px-5 py-8 text-center text-[var(--ink)]/40">Hələ satış yoxdur</td></tr>`;
 
   // purchase table
   const pTbody = document.getElementById('purchTable');
-  pTbody.innerHTML = purch.map(p=>`
+  pTbody.innerHTML = purch.map(p=>{
+    const isOverdue = p.nisye && !p.paid && daysSince(p.nisyeDate) >= 3;
+    const status = !p.nisye ? `<span class="text-xs px-2 py-1 rounded-full bg-green-50 text-green-600">Ödənilib</span>`
+      : p.paid ? `<span class="text-xs px-2 py-1 rounded-full bg-green-50 text-green-600">Nisyə · ödənildi</span>`
+      : `<span class="text-xs px-2 py-1 rounded-full ${isOverdue?'bg-red-50 text-red-600':'bg-yellow-50 text-yellow-700'}">Nisyə · ${daysSince(p.nisyeDate)} gün</span>`;
+    return `
     <tr class="border-t border-[#F0F7F6]">
       <td class="px-5 py-3 mono text-xs">${p.date}</td>
       <td class="px-5 py-3">${p.supplier}</td>
       <td class="px-5 py-3">${p.qty}</td>
       <td class="px-5 py-3 mono">${fmt(p.price)}</td>
       <td class="px-5 py-3 mono font-semibold">${fmt(p.qty*p.price)}</td>
-      <td class="px-5 py-3"><button onclick="deletePurch(${p.id})" class="text-red-400 hover:text-red-600 text-xs">Sil</button></td>
-    </tr>`).join('') || `<tr><td colspan="6" class="px-5 py-8 text-center text-[var(--ink)]/40">Hələ alış yoxdur</td></tr>`;
+      <td class="px-5 py-3">${status}</td>
+      <td class="px-5 py-3 whitespace-nowrap">
+        ${p.nisye && !p.paid ? `<button onclick="markPurchPaid(${p.id})" class="text-green-600 hover:text-green-700 text-xs mr-2">Ödə</button>` : ''}
+        <button onclick="deletePurch(${p.id})" class="text-red-400 hover:text-red-600 text-xs">Sil</button>
+      </td>
+    </tr>`;
+  }).join('') || `<tr><td colspan="7" class="px-5 py-8 text-center text-[var(--ink)]/40">Hələ alış yoxdur</td></tr>`;
 
   // recent
   const recent = [...sales.map(s=>({...s,type:'sale'})), ...purch.map(p=>({...p,type:'purch'}))]
@@ -833,10 +1029,51 @@ function renderAll(){
     <div class="flex items-center justify-between py-2 border-b border-[#F0F7F6] last:border-0">
       <div class="flex items-center gap-3">
         <span class="w-2 h-2 rounded-full" style="background:${r.type==='sale'?'#2EC4B6':'#0B3D55'}"></span>
-        <span>${r.type==='sale' ? 'Satış — '+r.customer : 'Alış — '+r.supplier}</span>
+        <span>${r.type==='sale' ? 'Satış — '+r.customer : 'Alış — '+r.supplier}${r.nisye && !r.paid ? ' 💳' : ''}</span>
       </div>
       <span class="mono text-[var(--ink)]/60">${r.qty} ədəd · ${r.date}</span>
     </div>`).join('') || `<p class="text-[var(--ink)]/40 text-center py-6">Hələ məlumat yoxdur</p>`;
+}
+
+/* ================= NİSYƏ ALERT (popup + səs) ================= */
+function playBeep(){
+  try{
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    [0,0.18,0.36].forEach((t,i)=>{
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = i%2===0 ? 880 : 660;
+      gain.gain.setValueAtTime(0.15, ctx.currentTime + t);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + t + 0.15);
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.start(ctx.currentTime + t);
+      osc.stop(ctx.currentTime + t + 0.16);
+    });
+  }catch(e){}
+}
+function checkNisyeAlerts(){
+  const overdue = getOverdueNisye().filter(n=>n.days >= 3);
+  if(!overdue.length) return;
+  // only alert once per day per session to avoid spamming on every tab switch
+  const todayKey = new Date().toISOString().slice(0,10);
+  if(LS.get('os_lastAlertShown','') === todayKey) return;
+  LS.set('os_lastAlertShown', todayKey);
+
+  playBeep();
+  const list = document.getElementById('nisyeModalList');
+  list.innerHTML = overdue.map(n=>`
+    <div class="flex items-center justify-between p-3 rounded-xl" style="background:#FFF1F0;">
+      <div>
+        <p class="font-semibold" style="color:var(--navy-deep);">${n.who}</p>
+        <p class="text-xs text-[var(--ink)]/50">${n.type==='sale'?'Satış nisyəsi':'Alış nisyəsi'} · ${n.days} gündür</p>
+      </div>
+      <p class="mono font-bold text-red-600">${fmt(n.total)} AZN</p>
+    </div>`).join('');
+  document.getElementById('nisyeModal').classList.remove('hidden');
+}
+function closeNisyeModal(){
+  document.getElementById('nisyeModal').classList.add('hidden');
 }
 
 /* ================= SETTINGS ACTIONS ================= */
@@ -879,6 +1116,222 @@ document.getElementById('importFile').addEventListener('change', e=>{
   };
   reader.readAsText(file);
 });
+
+/* ================= GITHUB BAĞLANTISI ================= */
+function saveGhConfig(){
+  LS.set('gh_repo', document.getElementById('ghRepo').value.trim());
+  LS.set('gh_token', document.getElementById('ghToken').value.trim());
+  document.getElementById('ghStatus').textContent = '✅ Yadda saxlanıldı.';
+  document.getElementById('ghStatus').className = 'text-xs mt-3 text-green-600';
+}
+function ghHeaders(){
+  return {
+    'Authorization': 'token ' + LS.get('gh_token',''),
+    'Accept': 'application/vnd.github+json'
+  };
+}
+async function ghGetFile(path){
+  const repo = LS.get('gh_repo','');
+  const res = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {headers: ghHeaders()});
+  if(!res.ok) return null;
+  return res.json();
+}
+async function ghPutFile(path, base64Content, message, sha){
+  const repo = LS.get('gh_repo','');
+  const body = { message, content: base64Content };
+  if(sha) body.sha = sha;
+  const res = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
+    method: 'PUT', headers: {...ghHeaders(), 'Content-Type':'application/json'},
+    body: JSON.stringify(body)
+  });
+  if(!res.ok){ const err = await res.json().catch(()=>({})); throw new Error(err.message || 'GitHub xətası'); }
+  return res.json();
+}
+function fileToBase64(file){
+  return new Promise((resolve,reject)=>{
+    const reader = new FileReader();
+    reader.onload = ()=> resolve(reader.result.split(',')[1]);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+async function ghGetConfig(){
+  const file = await ghGetFile('config.json');
+  if(!file) return { cfg: {products:[],phone:LS.get('os_phone','')}, sha: null };
+  const content = decodeURIComponent(escape(atob(file.content.replace(/\n/g,''))));
+  return { cfg: JSON.parse(content), sha: file.sha };
+}
+
+/* ================= MƏHSULLAR ================= */
+function getLocalProducts(){ return LS.get('os_products', []); }
+function setLocalProducts(p){ LS.set('os_products', p); }
+
+async function loadProductsAdmin(){
+  document.getElementById('productsList').innerHTML = `<p class="text-sm text-[var(--ink)]/40 col-span-full">Yüklənir...</p>`;
+  try{
+    const { cfg } = await ghGetConfig();
+    const products = cfg.products || [];
+    setLocalProducts(products);
+    renderProductsAdmin(products);
+  }catch(e){
+    renderProductsAdmin(getLocalProducts());
+  }
+}
+function renderProductsAdmin(products){
+  const wrap = document.getElementById('productsList');
+  if(!products.length){
+    wrap.innerHTML = `<p class="text-sm text-[var(--ink)]/40 col-span-full">Hələ məhsul yoxdur. Yuxarıdan əlavə et.</p>`;
+    return;
+  }
+  wrap.innerHTML = products.map(p=>`
+    <div class="bg-white rounded-2xl overflow-hidden border border-[#E1F3F1]">
+      <img src="${p.image||''}" alt="${p.name}" class="w-full h-36 object-cover" onerror="this.style.display='none'">
+      <div class="p-4">
+        <p class="font-semibold text-sm mb-1" style="color:var(--navy-deep);">${p.name} ${p.active===false?'<span class=\"text-xs text-red-400\">(deaktiv)</span>':''}</p>
+        <p class="mono text-sm mb-3" style="color:var(--aqua);">${fmt(p.price)} AZN</p>
+        <div class="flex gap-2">
+          <button onclick='editProduct(${JSON.stringify(p.id)})' class="text-xs px-3 py-1.5 rounded-full border border-[#DCEEEC] hover:bg-[var(--mist)]">Redaktə</button>
+          <button onclick="deleteProduct('${p.id}')" class="text-xs px-3 py-1.5 rounded-full text-red-500 hover:bg-red-50">Sil</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+function editProduct(id){
+  const p = getLocalProducts().find(x=>x.id===id);
+  if(!p) return;
+  document.getElementById('prodId').value = p.id;
+  document.getElementById('prodName').value = p.name;
+  document.getElementById('prodPrice').value = p.price;
+  document.getElementById('prodActive').checked = p.active!==false;
+  switchTab('products');
+  document.getElementById('prodStatus').textContent = 'Redaktə rejimi: "' + p.name + '". Şəkli dəyişmək istəmirsənsə boş burax.';
+  document.getElementById('prodStatus').className = 'text-xs mt-3 text-[var(--ink)]/50';
+}
+function resetProductForm(){
+  document.getElementById('productForm').reset();
+  document.getElementById('prodId').value = '';
+  document.getElementById('prodStatus').textContent = '';
+}
+async function deleteProduct(id){
+  if(!confirm('Bu məhsulu silmək istəyirsən?')) return;
+  if(!LS.get('gh_token','')){ alert('Əvvəlcə Tənzimləmələrdə GitHub token-i daxil et.'); return; }
+  try{
+    const { cfg, sha } = await ghGetConfig();
+    cfg.products = (cfg.products||[]).filter(p=>p.id!==id);
+    const b64 = btoa(unescape(encodeURIComponent(JSON.stringify(cfg,null,2))));
+    await ghPutFile('config.json', b64, 'Məhsul silindi', sha);
+    setLocalProducts(cfg.products);
+    renderProductsAdmin(cfg.products);
+    alert('Məhsul silindi və saytda yeniləndi.');
+  }catch(e){ alert('Xəta: ' + e.message); }
+}
+
+document.getElementById('productForm').addEventListener('submit', async e=>{
+  e.preventDefault();
+  const token = LS.get('gh_token','');
+  if(!token){ alert('Əvvəlcə Tənzimləmələr bölməsində GitHub repo və token daxil edib "Yadda saxla" et.'); switchTab('settings'); return; }
+
+  const statusEl = document.getElementById('prodStatus');
+  statusEl.textContent = '⏳ GitHub-a yüklənir...';
+  statusEl.className = 'text-xs mt-3 text-[var(--ink)]/60';
+
+  try{
+    const id = document.getElementById('prodId').value || ('p_' + Date.now());
+    const name = document.getElementById('prodName').value;
+    const price = Number(document.getElementById('prodPrice').value);
+    const active = document.getElementById('prodActive').checked;
+    const file = document.getElementById('prodImage').files[0];
+
+    const { cfg, sha } = await ghGetConfig();
+    cfg.products = cfg.products || [];
+    let imagePath = null;
+    const existing = cfg.products.find(p=>p.id===id);
+    if(existing) imagePath = existing.image;
+
+    if(file){
+      statusEl.textContent = '⏳ Şəkil yüklənir...';
+      const b64img = await fileToBase64(file);
+      const ext = file.name.split('.').pop();
+      const imgFilePath = `assets/products/${id}.${ext}`;
+      const existingImg = await ghGetFile(imgFilePath).catch(()=>null);
+      await ghPutFile(imgFilePath, b64img, `Məhsul şəkli: ${name}`, existingImg ? existingImg.sha : null);
+      imagePath = imgFilePath;
+    }
+
+    const newProduct = { id, name, price, image: imagePath, active };
+    const idx = cfg.products.findIndex(p=>p.id===id);
+    if(idx >= 0) cfg.products[idx] = newProduct; else cfg.products.push(newProduct);
+    cfg.phone = LS.get('os_phone', cfg.phone || '');
+
+    statusEl.textContent = '⏳ config.json yenilənir...';
+    const { sha: freshSha } = await ghGetConfig();
+    const b64cfg = btoa(unescape(encodeURIComponent(JSON.stringify(cfg,null,2))));
+    await ghPutFile('config.json', b64cfg, `Məhsul yeniləndi: ${name}`, freshSha);
+
+    setLocalProducts(cfg.products);
+    renderProductsAdmin(cfg.products);
+    resetProductForm();
+    statusEl.textContent = '✅ Uğurla yükləndi! Sayt 1-2 dəqiqəyə yenilənəcək.';
+    statusEl.className = 'text-xs mt-3 text-green-600';
+  }catch(err){
+    statusEl.textContent = '❌ Xəta: ' + err.message;
+    statusEl.className = 'text-xs mt-3 text-red-600';
+  }
+});
+
+/* ================= HESABATLAR ================= */
+function buildReport(){
+  const from = document.getElementById('repFrom').value;
+  const to = document.getElementById('repTo').value;
+  const sales = getSales().filter(s=> (!from||s.date>=from) && (!to||s.date<=to));
+  const purch = getPurch().filter(p=> (!from||p.date>=from) && (!to||p.date<=to));
+  const revenue = sales.reduce((a,s)=>a+s.qty*s.price,0);
+  const expense = purch.reduce((a,p)=>a+p.qty*p.price,0);
+  const nisyeTotal = [...sales,...purch].filter(n=>n.nisye && !n.paid).reduce((a,n)=>a+n.qty*n.price,0);
+  document.getElementById('reportSummary').innerHTML = `
+    <div class="bg-white rounded-2xl p-6 border border-[#E1F3F1]">
+      <p class="text-xs uppercase tracking-widest text-[var(--ink)]/50 mb-2">Dövr gəliri</p>
+      <p class="mono text-2xl font-bold" style="color:var(--aqua);">${fmt(revenue)} AZN</p>
+      <p class="text-xs text-[var(--ink)]/40 mt-1">${sales.length} satış</p>
+    </div>
+    <div class="bg-white rounded-2xl p-6 border border-[#E1F3F1]">
+      <p class="text-xs uppercase tracking-widest text-[var(--ink)]/50 mb-2">Dövr xərci</p>
+      <p class="mono text-2xl font-bold text-red-500">${fmt(expense)} AZN</p>
+      <p class="text-xs text-[var(--ink)]/40 mt-1">${purch.length} alış</p>
+    </div>
+    <div class="bg-white rounded-2xl p-6 border border-[#E1F3F1]">
+      <p class="text-xs uppercase tracking-widest text-[var(--ink)]/50 mb-2">Mənfəət / Nisyə</p>
+      <p class="mono text-2xl font-bold" style="color:var(--navy);">${fmt(revenue-expense)} AZN</p>
+      <p class="text-xs text-red-500 mt-1">${fmt(nisyeTotal)} AZN nisyədə</p>
+    </div>`;
+}
+function toCSV(rows, headers){
+  const esc = v => `"${String(v??'').replace(/"/g,'""')}"`;
+  return [headers.join(','), ...rows.map(r=> headers.map(h=>esc(r[h])).join(','))].join('\n');
+}
+function downloadCSVBlob(content, filename){
+  const blob = new Blob(['\uFEFF'+content], {type:'text/csv;charset=utf-8;'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  a.click();
+}
+function downloadReportCSV(kind){
+  const from = document.getElementById('repFrom').value;
+  const to = document.getElementById('repTo').value;
+  if(kind==='sales'){
+    const rows = getSales().filter(s=> (!from||s.date>=from) && (!to||s.date<=to))
+      .map(s=>({tarix:s.date, musteri:s.customer, eded:s.qty, qiymet:s.price, cem:(s.qty*s.price).toFixed(2), nisye: s.nisye?'Bəli':'Xeyr', odenildi: s.paid?'Bəli':'Xeyr'}));
+    downloadCSVBlob(toCSV(rows,['tarix','musteri','eded','qiymet','cem','nisye','odenildi']), `satislar-${from}_${to}.csv`);
+  } else if(kind==='purch'){
+    const rows = getPurch().filter(p=> (!from||p.date>=from) && (!to||p.date<=to))
+      .map(p=>({tarix:p.date, tedarukcu:p.supplier, eded:p.qty, qiymet:p.price, cem:(p.qty*p.price).toFixed(2), nisye: p.nisye?'Bəli':'Xeyr', odenildi: p.paid?'Bəli':'Xeyr'}));
+    downloadCSVBlob(toCSV(rows,['tarix','tedarukcu','eded','qiymet','cem','nisye','odenildi']), `alislar-${from}_${to}.csv`);
+  } else if(kind==='nisye'){
+    const rows = getOverdueNisye().map(n=>({tip: n.type==='sale'?'Satış':'Alış', ad:n.who, tarix:n.nisyeDate, gun:n.days, mebleg:n.total.toFixed(2)}));
+    downloadCSVBlob(toCSV(rows,['tip','ad','tarix','gun','mebleg']), `nisyeler-${new Date().toISOString().slice(0,10)}.csv`);
+  }
+}
 </script>
 </body>
 </html>
