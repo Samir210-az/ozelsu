@@ -5,6 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Özəl Su — 19 Litr Bulaq Suyu | Bakı</title>
 <meta name="description" content="Özəl Su — Bakıda 19 litrlik bulaq suyu çatdırılması. Sürətli sifariş, təmiz su, etibarlı xidmət.">
+
+<!-- Open Graph / WhatsApp, Facebook, Telegram preview -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://samir210-az.github.io/ozelsu/">
+<meta property="og:title" content="Özəl Su — 19 Litr Bulaq Suyu | Bakı">
+<meta property="og:description" content="Bakıda 19 litrlik bulaq suyu çatdırılması. Sürətli sifariş, təmiz su, etibarlı xidmət. Zəng: 070 204 55 52">
+<meta property="og:image" content="https://samir210-az.github.io/ozelsu/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="az_AZ">
+<meta property="og:site_name" content="Özəl Su">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Özəl Su — 19 Litr Bulaq Suyu | Bakı">
+<meta name="twitter:description" content="Bakıda 19 litrlik bulaq suyu çatdırılması. Sürətli sifariş, təmiz su, etibarlı xidmət.">
+<meta name="twitter:image" content="https://samir210-az.github.io/ozelsu/assets/og-image.jpg">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#073B4C">
 <meta name="mobile-web-app-capable" content="yes">
@@ -228,7 +245,7 @@
         </ul>
       </div>
       <div class="order-1 md:order-2 card-hover rounded-3xl overflow-hidden flex items-center justify-center shadow-xl" style="border:1px solid #E1F3F1;">
-        <img src="assets/gym_ad.jpg" alt="Özəl Su 19L bidon" class="w-full h-full object-cover" style="min-height:340px;">
+        <img src="assets/og-image.jpg" alt="Özəl Su 19L bidon" class="w-full h-full object-cover" style="min-height:340px;">
       </div>
     </div>
     <div id="publicProductsGrid" class="hidden grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-12"></div>
@@ -762,7 +779,7 @@ function renderPublicProducts(products){
   if(products.length <= 1) return; // single product keeps the original hand-built layout
   wrap.innerHTML = products.map(p=>`
     <div class="card-hover rounded-2xl overflow-hidden bg-white" style="border:1px solid #E1F3F1;">
-      <img src="${p.image||'assets/gym_ad.jpg'}" alt="${p.name}" class="w-full h-44 object-cover">
+      <img src="${p.image||'assets/og-image.jpg'}" alt="${p.name}" class="w-full h-44 object-cover">
       <div class="p-5">
         <h3 class="font-semibold mb-1" style="color:var(--navy-deep);">${p.name}</h3>
         <p class="mono text-xl font-bold" style="color:var(--aqua);">${fmt(p.price)} AZN</p>
