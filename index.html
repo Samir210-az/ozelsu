@@ -159,7 +159,13 @@
         <a href="#qiymet" class="hover:text-white transition">Qiymət</a>
         <a href="#elaqe" class="hover:text-white transition">Əlaqə</a>
       </nav>
-      <a href="#sifaris" class="btn-primary px-5 py-2.5 rounded-full text-sm">Sifariş et</a>
+      <div class="flex items-center gap-2">
+        <button id="installBtn" style="display:none;" class="btn-ghost px-4 py-2.5 rounded-full text-sm items-center gap-1.5">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 19h14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Quraşdır
+        </button>
+        <a href="#sifaris" class="btn-primary px-5 py-2.5 rounded-full text-sm">Sifariş et</a>
+      </div>
     </div>
   </header>
 
@@ -592,9 +598,33 @@ window.addEventListener('DOMContentLoaded', ()=>{
 
 /* ================= PWA SERVICE WORKER ================= */
 if('serviceWorker' in navigator){
-  window.addEventListener('load', ()=>{
-    navigator.serviceWorker.register('service-worker.js').catch(()=>{});
+  navigator.serviceWorker.register('service-worker.js').catch(()=>{});
+}
+
+/* ================= PWA INSTALL BUTTON ================= */
+let deferredPrompt = null;
+const installBtn = document.getElementById('installBtn');
+window.addEventListener('beforeinstallprompt', (e)=>{
+  e.preventDefault();
+  deferredPrompt = e;
+  if(installBtn) installBtn.style.display = 'inline-flex';
+});
+if(installBtn){
+  installBtn.addEventListener('click', async ()=>{
+    if(!deferredPrompt) return;
+    deferredPrompt.prompt();
+    await deferredPrompt.userChoice;
+    deferredPrompt = null;
+    installBtn.style.display = 'none';
   });
+}
+window.addEventListener('appinstalled', ()=>{
+  if(installBtn) installBtn.style.display = 'none';
+  deferredPrompt = null;
+});
+// already running as installed app -> hide button
+if(window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true){
+  if(installBtn) installBtn.style.display = 'none';
 }
 
 /* ================= SETTINGS (public) ================= */
